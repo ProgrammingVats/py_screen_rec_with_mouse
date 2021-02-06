@@ -25,6 +25,7 @@ try:
     out = cv2.VideoWriter(fname, fourcc, 5.0, (w, h))
     # pyttsx3.speak("your recording is going to be started. threee...... tooooo...... one.... start")
     while True:
+        ############################### screenshot ###################################
         screen = ImageGrab.grab()
 
         x = int(pg.position()[0])
@@ -35,9 +36,12 @@ try:
         # # draw.ellipse((x,y,x+20, y+20), fill=(255,100,0),outline = (0,0,0))
         img = Image.new('RGBA', (width, height), (0,0,0,50))
         img.paste(screen, (0,0))
-        # img.paste(cursor, (x,y), mask=cursor)
-        img.paste(logo,(width-120,height-150),mask=logo)
+        
+        ######################## you can also add watermark to your screen recorded video ##########################
+        #img.paste(logo,(width-120,height-150),mask=logo)
+        
         e = win32gui.GetIconInfo(win32gui.GetCursorInfo()[1])
+        ################ getting cursor type: arrow, hand,text
         if e[1] == 0:
             img.paste(cursor,(x,y),mask=cursor)
 
@@ -60,6 +64,6 @@ try:
     out.release()
     cv2.destroyAllWindows()
     # pyttsx3.speak("your recording is done!")
-
+############## if something goes wrong please comment i will try to resolve ##########
 except Exception as e:
     print(f"your recording could not be completed because of{e}")
